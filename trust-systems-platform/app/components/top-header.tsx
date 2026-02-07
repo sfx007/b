@@ -78,7 +78,7 @@ export default function TopHeader({
   return (
     <nav className="fixed top-0 left-0 right-0 z-[20] h-[50px] border-b border-gray-700/90 bg-[linear-gradient(180deg,#131a28_0%,#121722_100%)] shadow-[0_6px_18px_rgba(0,0,0,0.35)]">
       <div className="h-full px-3 md:px-4 flex items-center gap-3">
-        <Link href="/" className="shrink-0 flex items-center mr-1 md:mr-2">
+        <Link href="/" className="shrink-0 flex items-center mr-1 md:mr-2" suppressHydrationWarning>
           <Image
             src="/img/bootdev-logo-full-small.webp"
             alt="Boot.dev"
@@ -172,6 +172,7 @@ export default function TopHeader({
                 href="/reviews"
                 className="relative h-8 w-8 rounded-full bg-gray-900 border border-gray-700 hover:border-yellow-500/70 transition-colors flex items-center justify-center"
                 title="Reviews"
+                suppressHydrationWarning
               >
                 <Image src="/img/notification-silver.png" alt="Reviews" width={16} height={16} className="h-4 w-4" />
                 {dueReviews > 0 && (
@@ -185,6 +186,7 @@ export default function TopHeader({
                 href="/community"
                 className="relative h-8 w-8 rounded-full bg-gray-900 border border-gray-700 hover:border-blue-400/70 transition-colors flex items-center justify-center"
                 title="Community"
+                suppressHydrationWarning
               >
                 <Image src="/img/discord_logo_blue.png" alt="Community" width={16} height={16} className="h-4 w-4" />
                 {communityCount > 0 && (
@@ -213,6 +215,7 @@ export default function TopHeader({
                 href="/progress"
                 className="h-8 w-8 rounded-full overflow-hidden border border-gray-700 hover:border-yellow-500 transition-colors"
                 title={displayName}
+                suppressHydrationWarning
               >
                 <Image
                   src={profileImage}
