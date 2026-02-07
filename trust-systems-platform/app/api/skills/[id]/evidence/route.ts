@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { auth } from "@/lib/auth";
+import { getCurrentUser } from "@/lib/auth";
 import { prisma } from "@/lib/db";
 import { calculateSkillLevel } from "@/lib/skill-tree";
 
@@ -23,15 +23,15 @@ import { calculateSkillLevel } from "@/lib/skill-tree";
  */
 export async function POST(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const session = await auth();
-    if (!session?.user?.id) {
+    const user = await getCurrentUser();
+    if (!user?.id) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    const skillId = params.id;
+    const { id: skillId } = await params;
     const body = await request.json();
 
     const { project_id, scenario_tag, prove_passed, artifact_path } = body;
@@ -48,7 +48,7 @@ export async function POST(
     let userSkill = await prisma.userSkill.findUnique({
       where: {
         userId_skillId: {
-          userId: session.user.id,
+          userId: user.id,
           skillId,
         },
       },
@@ -58,7 +58,7 @@ export async function POST(
       // First time using this skill
       userSkill = await prisma.userSkill.create({
         data: {
-          userId: session.user.id,
+          userId: user.id,
           skillId,
           level: "unlocked",
           timesUsedValidated: 0,
@@ -70,7 +70,7 @@ export async function POST(
     // Always record the attempt (for motivation, not mastery)
     await prisma.skillAttempt.create({
       data: {
-        userId: session.user.id,
+        userId: user.id,
         skillId,
         attemptedAt: new Date(),
         context: `${project_id}/${scenario_tag}`,
@@ -84,7 +84,7 @@ export async function POST(
       const existingContext = await prisma.skillContext.findUnique({
         where: {
           userId_skillId_projectId_scenarioTag: {
-            userId: session.user.id,
+            userId: user.id,
             skillId,
             projectId: project_id,
             scenarioTag: scenario_tag,
@@ -96,7 +96,7 @@ export async function POST(
         // New context! Increment distinct count
         await prisma.skillContext.create({
           data: {
-            userId: session.user.id,
+            userId: user.id,
             skillId,
             projectId: project_id,
             scenarioTag: scenario_tag,
@@ -109,7 +109,7 @@ export async function POST(
         userSkill = await prisma.userSkill.update({
           where: {
             userId_skillId: {
-              userId: session.user.id,
+              userId: user.id,
               skillId,
             },
           },
@@ -126,7 +126,7 @@ export async function POST(
         await prisma.skillContext.update({
           where: {
             userId_skillId_projectId_scenarioTag: {
-              userId: session.user.id,
+              userId: user.id,
               skillId,
               projectId: project_id,
               scenarioTag: scenario_tag,
@@ -142,7 +142,7 @@ export async function POST(
         userSkill = await prisma.userSkill.update({
           where: {
             userId_skillId: {
-              userId: session.user.id,
+              userId: user.id,
               skillId,
             },
           },
@@ -159,7 +159,7 @@ export async function POST(
         userSkill = await prisma.userSkill.update({
           where: {
             userId_skillId: {
-              userId: session.user.id,
+              userId: user.id,
               skillId,
             },
           },
@@ -182,7 +182,7 @@ export async function POST(
       userSkill = await prisma.userSkill.update({
         where: {
           userId_skillId: {
-            userId: session.user.id,
+            userId: user.id,
             skillId,
           },
         },
