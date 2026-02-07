@@ -30,6 +30,9 @@ model User {
   benchmarks     WeeklyBenchmark[]
   trainingLogs   TrainingLog[]
   weeklyGates    WeeklyGate[]
+  userSkills     UserSkill[]
+  skillContexts  SkillContext[]
+  skillAttempts  SkillAttempt[]
 }
 
 model Session {
@@ -257,4 +260,67 @@ model WeeklyGate {
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([userId, weekNumber])
+}
+
+// ── Skill Tree V1 ──────────────────────────────────────────
+
+model Skill {
+  id              String   @id @default(cuid())
+  slug            String   @unique
+  title           String
+  description     String   // "Why this matters" - simple English
+  spineOrder      Int?     // 1-25 for core skills, null for hidden
+  category        String   // "cli", "network", "crypto", "wal", "consensus", etc.
+  xpPerUse        Int      @default(10)
+  createdAt       DateTime @default(now())
+
+  userSkills   UserSkill[]
+  contexts     SkillContext[]
+  skillAttempts SkillAttempt[]
+}
+
+model UserSkill {
+  id                    String   @id @default(cuid())
+  userId                String
+  skillId               String
+  level                 String   @default("unlocked") // unlocked, bronze, silver, gold, platinum
+  timesUsedValidated    Int      @default(0) // only counts when prove_passed=true
+  distinctContexts      Int      @default(0) // count of unique (project_id, scenario_tag) pairs
+  lastProvedAt          DateTime?
+  lastReviewPassedAt    DateTime? // for spaced review requirements
+  unlockedAt            DateTime @default(now())
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @default(now())
+
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  skill  Skill  @relation(fields: [skillId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, skillId])
+}
+
+model SkillContext {
+  id            String   @id @default(cuid())
+  userId        String
+  skillId       String
+  projectId     String   // project_id from lesson/quest
+  scenarioTag   String   // scenario context (e.g., "week-1-day-1", "kv-store-replication")
+  provePassed   Boolean  @default(false)
+  artifactPath  String?  // path to the shipped artifact
+  createdAt     DateTime @default(now())
+
+  user  User  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  skill Skill @relation(fields: [skillId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, skillId, projectId, scenarioTag])
+}
+
+model SkillAttempt {
+  id           String   @id @default(cuid())
+  userId       String
+  skillId      String
+  attemptedAt  DateTime @default(now())
+  context      String?  // free text context for motivation tracking
+
+  user  User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  skill Skill  @relation(fields: [skillId], references: [id], onDelete: Cascade)
 }

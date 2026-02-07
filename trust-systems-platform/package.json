@@ -16,7 +16,8 @@
     "visuals:sync": "npx tsx scripts/sync-visuals.ts",
     "visuals:validate": "npx tsx scripts/validate-visuals.ts",
     "db:push": "npx prisma db push",
-    "db:studio": "npx prisma studio"
+    "db:studio": "npx prisma studio",
+    "seed:skills": "npx tsx scripts/seed-skills.ts"
   },
   "dependencies": {
     "@monaco-editor/react": "^4.7.0",
