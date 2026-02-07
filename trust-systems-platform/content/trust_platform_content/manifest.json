@@ -1,0 +1,438 @@
+{
+  "parts": [
+    {
+      "id": "w01-cli-logger-discipline",
+      "slug": "w01-cli-logger-discipline",
+      "title": "CLI & Logger Discipline",
+      "order": 1,
+      "arc": "arc-1-foundations",
+      "files": {
+        "part": "parts/w01-cli-logger-discipline/part.md",
+        "quest": "parts/w01-cli-logger-discipline/quest.md",
+        "lessons": [
+          "parts/w01-cli-logger-discipline/lessons/01-quest-define-your-cli-contract-2h.md",
+          "parts/w01-cli-logger-discipline/lessons/02-quest-logger-write-path-2h.md",
+          "parts/w01-cli-logger-discipline/lessons/03-quest-validation-boundaries-2h.md",
+          "parts/w01-cli-logger-discipline/lessons/04-quest-error-catalog-2h.md",
+          "parts/w01-cli-logger-discipline/lessons/05-quest-test-plan-design-2h.md"
+        ]
+      }
+    },
+    {
+      "id": "w02-tcp-echo-server-with-stream-safe-framing",
+      "slug": "w02-tcp-echo-server-with-stream-safe-framing",
+      "title": "TCP Echo Server with Stream-Safe Framing",
+      "order": 2,
+      "arc": "arc-1-foundations",
+      "files": {
+        "part": "parts/w02-tcp-echo-server-with-stream-safe-framing/part.md",
+        "quest": "parts/w02-tcp-echo-server-with-stream-safe-framing/quest.md",
+        "lessons": [
+          "parts/w02-tcp-echo-server-with-stream-safe-framing/lessons/01-quest-tcp-lifecycle-spec-2h.md",
+          "parts/w02-tcp-echo-server-with-stream-safe-framing/lessons/02-quest-partial-io-mastery-2h.md",
+          "parts/w02-tcp-echo-server-with-stream-safe-framing/lessons/03-quest-frame-parser-2h.md",
+          "parts/w02-tcp-echo-server-with-stream-safe-framing/lessons/04-quest-timeout-policy-2h.md",
+          "parts/w02-tcp-echo-server-with-stream-safe-framing/lessons/05-quest-client-retry-rules-2h.md"
+        ]
+      }
+    },
+    {
+      "id": "w03-multi-client-event-loop",
+      "slug": "w03-multi-client-event-loop",
+      "title": "Multi-Client Event Loop",
+      "order": 3,
+      "arc": "arc-1-foundations",
+      "files": {
+        "part": "parts/w03-multi-client-event-loop/part.md",
+        "quest": "parts/w03-multi-client-event-loop/quest.md",
+        "lessons": [
+          "parts/w03-multi-client-event-loop/lessons/01-quest-event-loop-state-model-2h.md",
+          "parts/w03-multi-client-event-loop/lessons/02-quest-first-multi-client-loop-2h.md",
+          "parts/w03-multi-client-event-loop/lessons/03-quest-backpressure-policy-2h.md",
+          "parts/w03-multi-client-event-loop/lessons/04-quest-poll-migration-2h.md",
+          "parts/w03-multi-client-event-loop/lessons/05-quest-connection-lifecycle-tests-2h.md"
+        ]
+      }
+    },
+    {
+      "id": "w04-epoll-http-client",
+      "slug": "w04-epoll-http-client",
+      "title": "Epoll & HTTP Client",
+      "order": 4,
+      "arc": "arc-1-foundations",
+      "files": {
+        "part": "parts/w04-epoll-http-client/part.md",
+        "quest": "parts/w04-epoll-http-client/quest.md",
+        "lessons": [
+          "parts/w04-epoll-http-client/lessons/01-quest-epoll-strategy-2h.md",
+          "parts/w04-epoll-http-client/lessons/02-quest-timer-design-2h.md",
+          "parts/w04-epoll-http-client/lessons/03-quest-http-parser-spec-2h.md",
+          "parts/w04-epoll-http-client/lessons/04-quest-http-timeout-matrix-2h.md",
+          "parts/w04-epoll-http-client/lessons/05-quest-end-to-end-trace-2h.md"
+        ]
+      }
+    },
+    {
+      "id": "w05-thread-pool-safe-task-execution",
+      "slug": "w05-thread-pool-safe-task-execution",
+      "title": "Thread Pool & Safe Task Execution",
+      "order": 5,
+      "arc": "arc-2-hardening",
+      "files": {
+        "part": "parts/w05-thread-pool-safe-task-execution/part.md",
+        "quest": "parts/w05-thread-pool-safe-task-execution/quest.md",
+        "lessons": [
+          "parts/w05-thread-pool-safe-task-execution/lessons/01-quest-concurrency-model-2h.md",
+          "parts/w05-thread-pool-safe-task-execution/lessons/02-quest-bounded-work-queue-2h.md",
+          "parts/w05-thread-pool-safe-task-execution/lessons/03-quest-scheduling-policy-2h.md",
+          "parts/w05-thread-pool-safe-task-execution/lessons/04-quest-contention-metrics-2h.md",
+          "parts/w05-thread-pool-safe-task-execution/lessons/05-quest-graceful-shutdown-2h.md"
+        ]
+      }
+    },
+    {
+      "id": "w06-backpressure-overload-handling",
+      "slug": "w06-backpressure-overload-handling",
+      "title": "Backpressure & Overload Handling",
+      "order": 6,
+      "arc": "arc-2-hardening",
+      "files": {
+        "part": "parts/w06-backpressure-overload-handling/part.md",
+        "quest": "parts/w06-backpressure-overload-handling/quest.md",
+        "lessons": [
+          "parts/w06-backpressure-overload-handling/lessons/01-quest-overload-policy-ladder-2h.md",
+          "parts/w06-backpressure-overload-handling/lessons/02-quest-slow-client-defense-2h.md",
+          "parts/w06-backpressure-overload-handling/lessons/03-quest-egress-throttle-2h.md",
+          "parts/w06-backpressure-overload-handling/lessons/04-quest-deadline-budget-2h.md",
+          "parts/w06-backpressure-overload-handling/lessons/05-quest-failure-injection-matrix-2h.md"
+        ]
+      }
+    },
+    {
+      "id": "w07-hashing-integrity-proofs",
+      "slug": "w07-hashing-integrity-proofs",
+      "title": "Hashing & Integrity Proofs",
+      "order": 7,
+      "arc": "arc-2-hardening",
+      "files": {
+        "part": "parts/w07-hashing-integrity-proofs/part.md",
+        "quest": "parts/w07-hashing-integrity-proofs/quest.md",
+        "lessons": [
+          "parts/w07-hashing-integrity-proofs/lessons/01-quest-hash-use-cases-2h.md",
+          "parts/w07-hashing-integrity-proofs/lessons/02-quest-streaming-hash-plan-2h.md",
+          "parts/w07-hashing-integrity-proofs/lessons/03-quest-protocol-hash-envelope-2h.md",
+          "parts/w07-hashing-integrity-proofs/lessons/04-quest-canonicalization-rules-2h.md",
+          "parts/w07-hashing-integrity-proofs/lessons/05-quest-integrity-audit-drill-2h.md"
+        ]
+      }
+    },
+    {
+      "id": "w08-signatures-replay-protection",
+      "slug": "w08-signatures-replay-protection",
+      "title": "Signatures & Replay Protection",
+      "order": 8,
+      "arc": "arc-2-hardening",
+      "files": {
+        "part": "parts/w08-signatures-replay-protection/part.md",
+        "quest": "parts/w08-signatures-replay-protection/quest.md",
+        "lessons": [
+          "parts/w08-signatures-replay-protection/lessons/01-quest-key-policy-2h.md",
+          "parts/w08-signatures-replay-protection/lessons/02-quest-signverify-spec-2h.md",
+          "parts/w08-signatures-replay-protection/lessons/03-quest-replay-defense-2h.md",
+          "parts/w08-signatures-replay-protection/lessons/04-quest-signed-envelope-v1-2h.md",
+          "parts/w08-signatures-replay-protection/lessons/05-quest-verify-performance-2h.md"
+        ]
+      }
+    },
+    {
+      "id": "w09-kv-store-core-state-model",
+      "slug": "w09-kv-store-core-state-model",
+      "title": "KV Store Core & State Model",
+      "order": 9,
+      "arc": "arc-3-distributed-core",
+      "files": {
+        "part": "parts/w09-kv-store-core-state-model/part.md",
+        "quest": "parts/w09-kv-store-core-state-model/quest.md",
+        "lessons": [
+          "parts/w09-kv-store-core-state-model/lessons/01-quest-kv-command-spec-2h.md",
+          "parts/w09-kv-store-core-state-model/lessons/02-quest-versioning-rules-2h.md",
+          "parts/w09-kv-store-core-state-model/lessons/03-quest-serialization-format-2h.md",
+          "parts/w09-kv-store-core-state-model/lessons/04-quest-snapshot-rules-2h.md",
+          "parts/w09-kv-store-core-state-model/lessons/05-quest-kv-concurrency-policy-2h.md"
+        ]
+      }
+    },
+    {
+      "id": "w10-wal-durability-crash-recovery",
+      "slug": "w10-wal-durability-crash-recovery",
+      "title": "WAL Durability & Crash Recovery",
+      "order": 10,
+      "arc": "arc-3-distributed-core",
+      "files": {
+        "part": "parts/w10-wal-durability-crash-recovery/part.md",
+        "quest": "parts/w10-wal-durability-crash-recovery/quest.md",
+        "lessons": [
+          "parts/w10-wal-durability-crash-recovery/lessons/01-quest-wal-schema-2h.md",
+          "parts/w10-wal-durability-crash-recovery/lessons/02-quest-fsync-policy-2h.md",
+          "parts/w10-wal-durability-crash-recovery/lessons/03-quest-crash-drill-procedure-2h.md",
+          "parts/w10-wal-durability-crash-recovery/lessons/04-quest-recovery-algorithm-2h.md",
+          "parts/w10-wal-durability-crash-recovery/lessons/05-quest-checkpoint-compaction-2h.md"
+        ]
+      }
+    },
+    {
+      "id": "w11-replicated-kv-23-nodes",
+      "slug": "w11-replicated-kv-23-nodes",
+      "title": "Replicated KV (2\u20133 Nodes)",
+      "order": 11,
+      "arc": "arc-3-distributed-core",
+      "files": {
+        "part": "parts/w11-replicated-kv-23-nodes/part.md",
+        "quest": "parts/w11-replicated-kv-23-nodes/quest.md",
+        "lessons": [
+          "parts/w11-replicated-kv-23-nodes/lessons/01-quest-failure-model-2h.md",
+          "parts/w11-replicated-kv-23-nodes/lessons/02-quest-append-rpc-spec-2h.md",
+          "parts/w11-replicated-kv-23-nodes/lessons/03-quest-quorum-commit-rules-2h.md",
+          "parts/w11-replicated-kv-23-nodes/lessons/04-quest-follower-catch-up-2h.md",
+          "parts/w11-replicated-kv-23-nodes/lessons/05-quest-partition-policy-2h.md"
+        ]
+      }
+    },
+    {
+      "id": "w12-leader-election-client-idempotency",
+      "slug": "w12-leader-election-client-idempotency",
+      "title": "Leader Election + Client Idempotency",
+      "order": 12,
+      "arc": "arc-3-distributed-core",
+      "files": {
+        "part": "parts/w12-leader-election-client-idempotency/part.md",
+        "quest": "parts/w12-leader-election-client-idempotency/quest.md",
+        "lessons": [
+          "parts/w12-leader-election-client-idempotency/lessons/01-quest-election-timeouts-2h.md",
+          "parts/w12-leader-election-client-idempotency/lessons/02-quest-vote-rules-2h.md",
+          "parts/w12-leader-election-client-idempotency/lessons/03-quest-client-retry-idempotency-2h.md",
+          "parts/w12-leader-election-client-idempotency/lessons/04-quest-dedupe-store-rules-2h.md",
+          "parts/w12-leader-election-client-idempotency/lessons/05-quest-stale-leader-fencing-2h.md"
+        ]
+      }
+    },
+    {
+      "id": "w13-content-addressed-storage",
+      "slug": "w13-content-addressed-storage",
+      "title": "Content-Addressed Storage",
+      "order": 13,
+      "arc": "arc-4-trust-architecture",
+      "files": {
+        "part": "parts/w13-content-addressed-storage/part.md",
+        "quest": "parts/w13-content-addressed-storage/quest.md",
+        "lessons": [
+          "parts/w13-content-addressed-storage/lessons/01-cas-object-model.md",
+          "parts/w13-content-addressed-storage/lessons/02-cas-write-lifecycle.md",
+          "parts/w13-content-addressed-storage/lessons/03-chunk-manifest-spec.md",
+          "parts/w13-content-addressed-storage/lessons/04-cas-gc-policy.md",
+          "parts/w13-content-addressed-storage/lessons/05-cas-audit-drill.md"
+        ]
+      }
+    },
+    {
+      "id": "w14-merkle-trees-inclusion-proofs",
+      "slug": "w14-merkle-trees-inclusion-proofs",
+      "title": "Merkle Trees & Inclusion Proofs",
+      "order": 14,
+      "arc": "arc-4-trust-architecture",
+      "files": {
+        "part": "parts/w14-merkle-trees-inclusion-proofs/part.md",
+        "quest": "parts/w14-merkle-trees-inclusion-proofs/quest.md",
+        "lessons": [
+          "parts/w14-merkle-trees-inclusion-proofs/lessons/01-merkle-construction-rules.md",
+          "parts/w14-merkle-trees-inclusion-proofs/lessons/02-inclusion-proof-format.md",
+          "parts/w14-merkle-trees-inclusion-proofs/lessons/03-proof-verifier-rules.md",
+          "parts/w14-merkle-trees-inclusion-proofs/lessons/04-incremental-merkle-plan.md",
+          "parts/w14-merkle-trees-inclusion-proofs/lessons/05-adversarial-proof-tests.md"
+        ]
+      }
+    },
+    {
+      "id": "w15-transparency-log",
+      "slug": "w15-transparency-log",
+      "title": "Transparency Log",
+      "order": 15,
+      "arc": "arc-4-trust-architecture",
+      "files": {
+        "part": "parts/w15-transparency-log/part.md",
+        "quest": "parts/w15-transparency-log/quest.md",
+        "lessons": [
+          "parts/w15-transparency-log/lessons/01-log-append-contract.md",
+          "parts/w15-transparency-log/lessons/02-inclusion-api-bundle.md",
+          "parts/w15-transparency-log/lessons/03-consistency-proof-rules.md",
+          "parts/w15-transparency-log/lessons/04-checkpoint-signature-schema.md",
+          "parts/w15-transparency-log/lessons/05-verifier-workflow.md"
+        ]
+      }
+    },
+    {
+      "id": "w16-monitoring-anti-equivocation",
+      "slug": "w16-monitoring-anti-equivocation",
+      "title": "Monitoring & Anti-Equivocation",
+      "order": 16,
+      "arc": "arc-4-trust-architecture",
+      "files": {
+        "part": "parts/w16-monitoring-anti-equivocation/part.md",
+        "quest": "parts/w16-monitoring-anti-equivocation/quest.md",
+        "lessons": [
+          "parts/w16-monitoring-anti-equivocation/lessons/01-monitor-architecture.md",
+          "parts/w16-monitoring-anti-equivocation/lessons/02-monitor-gossip-schema.md",
+          "parts/w16-monitoring-anti-equivocation/lessons/03-equivocation-detection.md",
+          "parts/w16-monitoring-anti-equivocation/lessons/04-alert-policy.md",
+          "parts/w16-monitoring-anti-equivocation/lessons/05-incident-runbook.md"
+        ]
+      }
+    },
+    {
+      "id": "w17-issue-signed-civic-documents",
+      "slug": "w17-issue-signed-civic-documents",
+      "title": "Issue Signed Civic Documents",
+      "order": 17,
+      "arc": "arc-5-civictrust-capstone",
+      "files": {
+        "part": "parts/w17-issue-signed-civic-documents/part.md",
+        "quest": "parts/w17-issue-signed-civic-documents/quest.md",
+        "lessons": [
+          "parts/w17-issue-signed-civic-documents/lessons/01-document-schema.md",
+          "parts/w17-issue-signed-civic-documents/lessons/02-issuer-key-policy.md",
+          "parts/w17-issue-signed-civic-documents/lessons/03-issue-workflow.md",
+          "parts/w17-issue-signed-civic-documents/lessons/04-verify-revocation-rules.md",
+          "parts/w17-issue-signed-civic-documents/lessons/05-policy-gates.md"
+        ]
+      }
+    },
+    {
+      "id": "w18-transparency-log-anchoring",
+      "slug": "w18-transparency-log-anchoring",
+      "title": "Transparency Log Anchoring",
+      "order": 18,
+      "arc": "arc-5-civictrust-capstone",
+      "files": {
+        "part": "parts/w18-transparency-log-anchoring/part.md",
+        "quest": "parts/w18-transparency-log-anchoring/quest.md",
+        "lessons": [
+          "parts/w18-transparency-log-anchoring/lessons/01-anchoring-workflow.md",
+          "parts/w18-transparency-log-anchoring/lessons/02-receipt-bundle-schema.md",
+          "parts/w18-transparency-log-anchoring/lessons/03-anchor-verifier-sequence.md",
+          "parts/w18-transparency-log-anchoring/lessons/04-receipt-freshness-policy.md",
+          "parts/w18-transparency-log-anchoring/lessons/05-anchoring-attack-matrix.md"
+        ]
+      }
+    },
+    {
+      "id": "w19-offline-verification-package",
+      "slug": "w19-offline-verification-package",
+      "title": "Offline Verification Package",
+      "order": 19,
+      "arc": "arc-5-civictrust-capstone",
+      "files": {
+        "part": "parts/w19-offline-verification-package/part.md",
+        "quest": "parts/w19-offline-verification-package/quest.md",
+        "lessons": [
+          "parts/w19-offline-verification-package/lessons/01-verifier-ux-contract.md",
+          "parts/w19-offline-verification-package/lessons/02-offline-bundle-format.md",
+          "parts/w19-offline-verification-package/lessons/03-air-gap-verification-flow.md",
+          "parts/w19-offline-verification-package/lessons/04-time-policy-modes.md",
+          "parts/w19-offline-verification-package/lessons/05-batch-verifier-rules.md"
+        ]
+      }
+    },
+    {
+      "id": "w20-failure-survival-hardening",
+      "slug": "w20-failure-survival-hardening",
+      "title": "Failure Survival Hardening",
+      "order": 20,
+      "arc": "arc-5-civictrust-capstone",
+      "files": {
+        "part": "parts/w20-failure-survival-hardening/part.md",
+        "quest": "parts/w20-failure-survival-hardening/quest.md",
+        "lessons": [
+          "parts/w20-failure-survival-hardening/lessons/01-chaos-matrix.md",
+          "parts/w20-failure-survival-hardening/lessons/02-node-crash-drill.md",
+          "parts/w20-failure-survival-hardening/lessons/03-partition-drill.md",
+          "parts/w20-failure-survival-hardening/lessons/04-key-compromise-runbook.md",
+          "parts/w20-failure-survival-hardening/lessons/05-restore-validation.md"
+        ]
+      }
+    },
+    {
+      "id": "w21-reliability-slo-story",
+      "slug": "w21-reliability-slo-story",
+      "title": "Reliability / SLO Story",
+      "order": 21,
+      "arc": "arc-6-ship-it",
+      "files": {
+        "part": "parts/w21-reliability-slo-story/part.md",
+        "quest": "parts/w21-reliability-slo-story/quest.md",
+        "lessons": [
+          "parts/w21-reliability-slo-story/lessons/01-slislo-table.md",
+          "parts/w21-reliability-slo-story/lessons/02-metrics-design.md",
+          "parts/w21-reliability-slo-story/lessons/03-dashboard-spec.md",
+          "parts/w21-reliability-slo-story/lessons/04-alert-rules.md",
+          "parts/w21-reliability-slo-story/lessons/05-capacity-plan.md"
+        ]
+      }
+    },
+    {
+      "id": "w22-security-threat-model-story",
+      "slug": "w22-security-threat-model-story",
+      "title": "Security / Threat Model Story",
+      "order": 22,
+      "arc": "arc-6-ship-it",
+      "files": {
+        "part": "parts/w22-security-threat-model-story/part.md",
+        "quest": "parts/w22-security-threat-model-story/quest.md",
+        "lessons": [
+          "parts/w22-security-threat-model-story/lessons/01-threat-model-map-stride.md",
+          "parts/w22-security-threat-model-story/lessons/02-abuse-cases-top-10.md",
+          "parts/w22-security-threat-model-story/lessons/03-threat-control-matrix.md",
+          "parts/w22-security-threat-model-story/lessons/04-supply-chain-secrets.md",
+          "parts/w22-security-threat-model-story/lessons/05-security-test-plan.md"
+        ]
+      }
+    },
+    {
+      "id": "w23-docs-demos-interview-narratives",
+      "slug": "w23-docs-demos-interview-narratives",
+      "title": "Docs, Demos & Interview Narratives",
+      "order": 23,
+      "arc": "arc-6-ship-it",
+      "files": {
+        "part": "parts/w23-docs-demos-interview-narratives/part.md",
+        "quest": "parts/w23-docs-demos-interview-narratives/quest.md",
+        "lessons": [
+          "parts/w23-docs-demos-interview-narratives/lessons/01-architecture-diagram-plan.md",
+          "parts/w23-docs-demos-interview-narratives/lessons/02-readme-outline.md",
+          "parts/w23-docs-demos-interview-narratives/lessons/03-demo-script.md",
+          "parts/w23-docs-demos-interview-narratives/lessons/04-video-storyboard.md",
+          "parts/w23-docs-demos-interview-narratives/lessons/05-interview-story-bank-star.md"
+        ]
+      }
+    },
+    {
+      "id": "w24-final-interview-prep-publication",
+      "slug": "w24-final-interview-prep-publication",
+      "title": "Final Interview Prep & Publication",
+      "order": 24,
+      "arc": "arc-6-ship-it",
+      "files": {
+        "part": "parts/w24-final-interview-prep-publication/part.md",
+        "quest": "parts/w24-final-interview-prep-publication/quest.md",
+        "lessons": [
+          "parts/w24-final-interview-prep-publication/lessons/01-distributed-systems-qa.md",
+          "parts/w24-final-interview-prep-publication/lessons/02-trust-architecture-qa.md",
+          "parts/w24-final-interview-prep-publication/lessons/03-debug-drills.md",
+          "parts/w24-final-interview-prep-publication/lessons/04-system-design-walkthrough.md",
+          "parts/w24-final-interview-prep-publication/lessons/05-final-demo-rehearsal.md"
+        ]
+      }
+    }
+  ],
+  "generated_at_utc": "2026-02-06T20:46:47.134065Z",
+  "format_version": "v1"
+}

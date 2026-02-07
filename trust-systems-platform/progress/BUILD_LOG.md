@@ -1,0 +1,295 @@
+# BUILD_LOG
+
+## Entry
+- UTC timestamp: 2026-02-06T21:10:40Z
+- What changed:
+  - Audited existing `trust-systems-platform` codebase and verified this project already includes Next.js App Router, Prisma/SQLite, lesson/quest/progress/review features, and progress docs.
+  - Located content pack ZIP at `/home/obajali/Documents/project-system/trust_platform_content_pack.zip`.
+  - Unzipped content pack into `/home/obajali/Documents/project-system/trust-systems-platform/content`.
+  - Confirmed pack structure and metadata format:
+    - `content/trust_platform_content/manifest.json`
+    - `content/trust_platform_content/parts/<part-slug>/part.md`
+    - `content/trust_platform_content/parts/<part-slug>/lessons/*.md`
+    - `content/trust_platform_content/parts/<part-slug>/quest.md`
+  - Inspected front matter fields for part, lesson, and quest files.
+- Files created/modified:
+  - `content/trust_platform_content/**` (unzipped content pack)
+  - `progress/BUILD_LOG.md` (recreated)
+- Commands run:
+  - `ls -la /home/obajali/Documents/project-system`
+  - `ls -la /home/obajali/Documents/project-system/trust-systems-platform`
+  - `find /home/obajali/Documents/project-system -maxdepth 3 -name 'trust_platform_content_pack.zip' -o -name 'manifest.json'`
+  - `unzip -l /home/obajali/Documents/project-system/trust_platform_content_pack.zip`
+  - `mkdir -p /home/obajali/Documents/project-system/trust-systems-platform/content && rm -rf /home/obajali/Documents/project-system/trust-systems-platform/content/* && unzip -o /home/obajali/Documents/project-system/trust_platform_content_pack.zip -d /home/obajali/Documents/project-system/trust-systems-platform/content`
+  - `find /home/obajali/Documents/project-system/trust-systems-platform/content -maxdepth 4 -type f | sort`
+  - `sed -n '1,240p' /home/obajali/Documents/project-system/trust-systems-platform/content/trust_platform_content/manifest.json`
+  - `sed -n '1,220p' /home/obajali/Documents/project-system/trust-systems-platform/content/trust_platform_content/parts/w01-cli-logger-discipline/part.md`
+  - `sed -n '1,260p' /home/obajali/Documents/project-system/trust-systems-platform/content/trust_platform_content/parts/w01-cli-logger-discipline/lessons/01-quest-define-your-cli-contract-2h.md`
+  - `sed -n '1,260p' /home/obajali/Documents/project-system/trust-systems-platform/content/trust_platform_content/parts/w01-cli-logger-discipline/quest.md`
+- Next step:
+  - Rewrite progress docs (`TODO`, `HANDOFF`) and then align Prisma schema + content importer to this content pack format and required data model.
+
+## Entry
+- UTC timestamp: 2026-02-06T21:11:36Z
+- What changed:
+  - Recreated mandatory progress tracking files in required format.
+  - Reset TODO checklist to match requested delivery plan and stop condition.
+  - Wrote concise HANDOFF snapshot for quick takeover.
+- Files created/modified:
+  - `progress/BUILD_LOG.md`
+  - `progress/TODO.md`
+  - `progress/HANDOFF.md`
+- Commands run:
+  - `date -u +"%Y-%m-%dT%H:%M:%SZ"`
+  - file edits via patch tool
+- Next step:
+  - Audit current Prisma schema/routes/importer against required v1 contract and implement schema + importer alignment first.
+
+## Entry
+- UTC timestamp: 2026-02-06T21:11:58Z
+- What changed:
+  - Performed implementation gap audit against required v1 contract.
+  - Confirmed existing schema and routes need alignment for: `proofRulesJson`, `reviewScheduleDays`, required lesson route shape, and uploader-based proof flow.
+  - Confirmed importer currently targets legacy `content/<slug>/part.json` layout and must be rewritten for manifest-driven pack.
+- Files created/modified:
+  - `progress/BUILD_LOG.md`
+- Commands run:
+  - `sed -n '1,320p' prisma/schema.prisma`
+  - `cat package.json`
+  - `find app -maxdepth 5 -type f | sort`
+  - `sed -n '1,320p' scripts/sync-content.ts`
+  - `sed -n '1,320p' lib/content-loader.ts`
+  - `sed -n '1,320p' lib/actions.ts`
+- Next step:
+  - Implement schema alignment and regenerate migration SQL for required fields and upload support.
+
+## Entry
+- UTC timestamp: 2026-02-06T21:15:07Z
+- What changed:
+  - Rewrote content metadata contracts to parse the provided content pack front matter format.
+  - Switched loader from legacy `content/<slug>/part.json` scanning to `content/trust_platform_content/manifest.json` driven parsing.
+  - Added proof-rule normalization (`manual_or_regex`, `paste_or_upload`, regex patterns) for lessons/quests.
+  - Rewrote `content:sync` script to upsert parts/lessons/quests from manifest files.
+- Files created/modified:
+  - `lib/schemas.ts`
+  - `lib/content-loader.ts`
+  - `scripts/sync-content.ts`
+- Commands run:
+  - file edits via shell heredoc
+- Next step:
+  - Extend Prisma schema and SQL migration for required v1 compatibility fields used by sync/submissions.
+
+## Entry
+- UTC timestamp: 2026-02-06T21:22:18Z
+- What changed:
+  - Extended Prisma schema for v1 compatibility fields:
+    - `Lesson.proofRulesJson`, `Lesson.reviewScheduleDays`
+    - `Quest.slug`, `Quest.proofRulesJson`
+    - `Submission.pastedText`, `Submission.uploadPath`
+  - Added migration SQL for the above columns.
+  - Updated review scheduling utilities to support metadata-driven schedules.
+  - Updated proof validation to support `manual`, `regex`, and `manual_or_regex` modes.
+- Files created/modified:
+  - `prisma/schema.prisma`
+  - `prisma/migrations/20260206211700_v1_content_submission_compat/migration.sql`
+  - `lib/schedule-reviews.ts`
+  - `lib/validate-proof.ts`
+- Commands run:
+  - file edits via patch/heredoc
+- Next step:
+  - Implement unified submission service + upload API endpoints + route/page alignment.
+
+## Entry
+- UTC timestamp: 2026-02-06T21:22:18Z
+- What changed:
+  - Added unified submission service with auto-check/manual pass fallback, XP/progress updates, and review scheduling.
+  - Added local upload helper writing proof files to `/uploads`.
+  - Added multipart submission APIs:
+    - `POST /api/submissions/lesson`
+    - `POST /api/submissions/quest`
+  - Updated lesson/quest forms to support pasted proof + file upload + manual pass.
+  - Added required route structure and page flow:
+    - `/parts/[partSlug]/lessons/[lessonSlug]`
+    - `/parts/[partSlug]/quest`
+  - Added legacy redirects from old lesson/quest URLs to new paths.
+  - Updated login/register redirect flow to reduce "stuck on login page" behavior.
+  - Removed pricing page route.
+- Files created/modified:
+  - `lib/submissions.ts`
+  - `lib/actions.ts`
+  - `lib/uploads.ts`
+  - `app/api/submissions/lesson/route.ts`
+  - `app/api/submissions/quest/route.ts`
+  - `app/lesson/[partSlug]/[lessonSlug]/submission-form.tsx`
+  - `app/quest/[partSlug]/quest-form.tsx`
+  - `app/parts/[partSlug]/lessons/[lessonSlug]/page.tsx`
+  - `app/parts/[partSlug]/quest/page.tsx`
+  - `app/lesson/[partSlug]/[lessonSlug]/page.tsx`
+  - `app/quest/[partSlug]/page.tsx`
+  - `app/parts/[slug]/page.tsx`
+  - `app/reviews/page.tsx`
+  - `app/search/page.tsx`
+  - `app/login/page.tsx`
+  - `app/register/page.tsx`
+  - `app/pricing/page.tsx` (deleted)
+- Commands run:
+  - file edits via patch/heredoc
+- Next step:
+  - Align progress/reviews final behavior, add minimal tests, and update README + handoff snapshot.
+
+## Entry
+- UTC timestamp: 2026-02-06T21:22:18Z
+- What changed:
+  - Extended progress aggregation to expose `nextLesson` recommendation.
+  - Added review item quick questions + explicit `Mark Reviewed` action.
+  - Added minimal tests for:
+    - front matter parsing
+    - review scheduling logic
+  - Updated npm scripts with `npm test`.
+  - Replaced README with run/sync/content docs for this platform.
+- Files created/modified:
+  - `lib/progress.ts`
+  - `app/reviews/review-item.tsx`
+  - `app/progress/page.tsx`
+  - `tests/frontmatter.test.ts`
+  - `tests/review-schedule.test.ts`
+  - `package.json`
+  - `README.md`
+- Commands run:
+  - file edits via patch/heredoc
+- Next step:
+  - Final QA sanity check on changed files and finalize TODO/HANDOFF status with known limitations.
+
+## Entry
+- UTC timestamp: 2026-02-06T21:23:18Z
+- What changed:
+  - Ran static consistency sweep across app/lib for route/path and field-reference regressions.
+  - Corrected link targets where needed to ensure new lesson route path is used in parts/reviews/search flows.
+  - Finalized progress docs (`TODO`, `HANDOFF`) with current status and local run instructions.
+- Files created/modified:
+  - `app/parts/[slug]/page.tsx`
+  - `app/reviews/page.tsx`
+  - `app/search/page.tsx`
+  - `progress/TODO.md`
+  - `progress/HANDOFF.md`
+  - `progress/BUILD_LOG.md`
+- Commands run:
+  - `rg -n '/lesson/' app lib scripts prisma`
+  - `rg -n 'proofRulesJson|reviewScheduleDays|pastedText|uploadPath' app lib scripts prisma`
+  - `rg -n '/parts//|/quest//|/lessons//' app lib scripts`
+- Next step:
+  - Run local runtime validation (`npm run db:push`, `npm run content:sync`, `npm test`, `npm run dev`) in an environment with Node installed.
+
+## Entry
+- UTC timestamp: 2026-02-06T21:52:28Z
+- What changed:
+  - Generated consistent visual model SVGs per part and stored them under `/public/visuals`.
+  - Replaced all "Visual Model" placeholder code blocks in lesson + quest markdown files with image links to the new visuals.
+- Files created/modified:
+  - `public/visuals/*.svg`
+  - `content/trust_platform_content/parts/*/lessons/*.md`
+  - `content/trust_platform_content/parts/*/quest.md`
+  - `scripts/generate-visuals.sh`
+  - `scripts/replace-visual-models.sh`
+- Commands run:
+  - `scripts/generate-visuals.sh`
+  - `scripts/replace-visual-models.sh`
+- Next step:
+  - Re-run `npm run content:sync` locally so updated markdown images are imported into the DB.
+
+## Entry
+- UTC timestamp: 2026-02-06T22:42:30Z
+- What changed:
+  - Unzipped visual mapping pack into `/visuals`.
+  - Added Prisma models for visual assets + lesson/quest/part visual mappings and contentId keys.
+  - Added visuals sync/validate scripts and npm entries.
+  - Added Visual Model hero rendering with TASL attribution and license accordion on lesson + quest pages.
+  - Updated content sync to persist contentId for lesson/quest to support mappings.
+  - Updated README with visual mapping workflow.
+- Files created/modified:
+  - `visuals/*`
+  - `prisma/schema.prisma`
+  - `prisma/migrations/20260206222030_visual_assets/migration.sql`
+  - `scripts/sync-visuals.ts`
+  - `scripts/validate-visuals.ts`
+  - `scripts/sync-content.ts`
+  - `package.json`
+  - `app/components/visual-hero.tsx`
+  - `app/parts/[partSlug]/lessons/[lessonSlug]/page.tsx`
+  - `app/parts/[partSlug]/quest/page.tsx`
+  - `README.md`
+- Commands run:
+  - `unzip -l /home/obajali/Documents/project-system/lesson_visual_mapping_pack.zip`
+  - `unzip -o /home/obajali/Documents/project-system/lesson_visual_mapping_pack.zip -d visuals`
+- Next step:
+  - Run `npm run db:push`, `npm run content:sync`, `npm run visuals:sync`, `npm run visuals:validate` locally.
+
+## Entry — Lesson Page UX Redesign
+- UTC timestamp: 2026-02-07T09:00:00Z
+- What changed:
+  - Full redesign of lesson and quest pages from scroll-based layout to "guided learning loop" stepper: Visual → Rules → Practice → Prove.
+  - Created 8 new client components in `app/components/lesson/`:
+    - `GoalCard` — above-the-fold card showing goal, deliverable, time, and Start button.
+    - `StepperNav` — 4-step stepper with Next/Back, session-persisted step state.
+    - `VisualModelCard` — thumbnail visual with click-to-zoom modal, callout annotations, license accordion.
+    - `PracticeLadder` — structured practice items: Warmup → Core → Edge Case → Boss, with hint accordions.
+    - `ProofBox` — paste + upload submission with auto-check and PASS/FAIL result display (supports both lesson and quest APIs).
+    - `LessonHeader` — breadcrumbs + clean title (strips trailing "2h") + single-source duration badge.
+    - `StickyActionPanel` — desktop-only sidebar with step checklist and quick jump buttons.
+    - `LessonStepperClient` — orchestrator that wires all panels together with step routing.
+  - Created `lib/extract-sections.ts` — smart parser that extracts goal, deliverable, practice items, callouts, and "what counts as proof" from raw lesson markdown.
+  - Rewrote `app/parts/[partSlug]/lessons/[lessonSlug]/page.tsx` — server component now fetches data, extracts sections, and delegates to `LessonStepperClient`.
+  - Rewrote `app/parts/[partSlug]/quest/page.tsx` — same guided stepper pattern, passing `mode="quest"` for correct submission API routing.
+  - Fixed data consistency: title "2h" suffix is stripped via `cleanTitle()` in `LessonHeader`; duration is always derived from `durationMinutes` field (single source of truth).
+  - WCAG contrast pass: bumped `gray-450` (#818a98→#929cac), `gray-500` (#6e7888→#7a8596), `gray-550` (#606877→#6b7585) in Tailwind theme for ≥4.5:1 ratio against dark backgrounds.
+  - Updated `progress/TODO.md` with full UX redesign checklist.
+  - Added UX validation checklist to `progress/HANDOFF.md`.
+- Files created:
+  - `app/components/lesson/goal-card.tsx`
+  - `app/components/lesson/stepper-nav.tsx`
+  - `app/components/lesson/visual-model-card.tsx`
+  - `app/components/lesson/practice-ladder.tsx`
+  - `app/components/lesson/proof-box.tsx`
+  - `app/components/lesson/lesson-header.tsx`
+  - `app/components/lesson/sticky-action-panel.tsx`
+  - `app/components/lesson/lesson-stepper-client.tsx`
+  - `lib/extract-sections.ts`
+- Files modified:
+  - `app/parts/[partSlug]/lessons/[lessonSlug]/page.tsx`
+  - `app/parts/[partSlug]/quest/page.tsx`
+  - `app/globals.css`
+  - `progress/BUILD_LOG.md`
+  - `progress/TODO.md`
+  - `progress/HANDOFF.md`
+- Commands run:
+  - File edits via patch tool
+- Next step:
+  - Restart dev server and verify clean compile on http://localhost:3060.
+
+## Entry
+- UTC timestamp: 2026-02-07T00:49:25Z
+- What changed:
+  - Rewrote all Part 1 lessons (5) and the Part 1 quest (lesson 6) in simple English with consistent task structure, stable exit code rules, and clear proof instructions.
+- Files created/modified:
+  - `content/trust_platform_content/parts/w01-cli-logger-discipline/lessons/01-quest-define-your-cli-contract-2h.md`
+  - `content/trust_platform_content/parts/w01-cli-logger-discipline/lessons/02-quest-logger-write-path-2h.md`
+  - `content/trust_platform_content/parts/w01-cli-logger-discipline/lessons/03-quest-validation-boundaries-2h.md`
+  - `content/trust_platform_content/parts/w01-cli-logger-discipline/lessons/04-quest-error-catalog-2h.md`
+  - `content/trust_platform_content/parts/w01-cli-logger-discipline/lessons/05-quest-test-plan-design-2h.md`
+  - `content/trust_platform_content/parts/w01-cli-logger-discipline/quest.md`
+- Commands run:
+  - file edits via shell heredoc
+- Next step:
+  - Re-run `npm run content:sync` locally to update DB content.
+
+## Entry
+- UTC timestamp: 2026-02-07T01:02:49Z
+- What changed:
+  - Updated lesson section extraction to recognize new Part 1 headings (Goal/Build/Do/Done when/Proof) so Rules/Practice buttons enable and show content.
+  - Added default rules block if no explicit Rules/Learn section exists.
+- Files created/modified:
+  - `lib/extract-sections.ts`
+- Commands run:
+  - file edits via patch
+- Next step:
+  - Re-run `npm run dev` and refresh lesson pages to verify Rules/Practice buttons work.

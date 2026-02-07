@@ -1,0 +1,28 @@
+# TODO
+
+- [x] Create mandatory progress files (`BUILD_LOG.md`, `TODO.md`, `HANDOFF.md`)
+- [x] Unpack content pack into `/content` and inspect manifest/front matter
+- [x] Align Prisma schema to required v1 model fields (`proofRulesJson`, `reviewScheduleDays`, submission upload path)
+- [ ] Create and run migration(s) for schema alignment
+- [x] Rewrite content loader/importer for `manifest.json` + markdown front matter
+- [x] Implement `npm run content:sync` for upsert import
+- [x] Build/align required pages:
+- [x] `/parts`
+- [x] `/parts/[partSlug]`
+- [x] `/parts/[partSlug]/lessons/[lessonSlug]`
+- [x] `/parts/[partSlug]/quest`
+- [x] `/reviews`
+- [x] `/progress`
+- [x] Implement proof submission with paste + upload (`/uploads` local storage)
+- [x] Implement regex auto-pass/manual pass fallback using `proofRulesJson`
+- [x] Implement spaced repetition item creation on pass (`[1,3,7,14]` or metadata)
+- [x] Implement review completion flow and due list
+- [x] Implement progress calculations + next lesson recommendation
+- [x] Add minimal tests:
+- [x] front matter parsing
+- [x] review schedule logic
+- [x] Update README (run, sync, content authoring)
+- [x] Replace Visual Model placeholders with real images
+- [x] Integrate visual mapping pack + hero visuals + attribution
+- [x] Rewrite Part 1 lessons and quest in simple English
+- [ ] Final QA walkthrough and finalize HANDOFF snapshot

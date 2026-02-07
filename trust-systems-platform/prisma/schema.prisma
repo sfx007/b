@@ -1,0 +1,260 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model User {
+  id             String   @id @default(cuid())
+  username       String   @unique
+  displayName    String   @default("")
+  passwordHash   String   @default("")
+  bio            String   @default("")
+  profileImage   String   @default("/img/new_boots_profile.webp")
+  createdAt      DateTime @default(now())
+  xp             Int      @default(0)
+  level          Int      @default(1)
+  gems           Int      @default(0)
+  currentStreak  Int      @default(0)
+  longestStreak  Int      @default(0)
+  lastStreakDate DateTime?
+
+  submissions    Submission[]
+  reviewItems    ReviewItem[]
+  userProgress   UserProgress[]
+  achievements   UserAchievement[]
+  sessions       Session[]
+  benchmarks     WeeklyBenchmark[]
+  trainingLogs   TrainingLog[]
+  weeklyGates    WeeklyGate[]
+}
+
+model Session {
+  id        String   @id @default(cuid())
+  userId    String
+  token     String   @unique
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Part {
+  id          String @id @default(cuid())
+  slug        String @unique
+  title       String
+  description String
+  order       Int
+
+  lessons Lesson[]
+  quest   Quest?
+  partVisual PartVisual?
+}
+
+model Lesson {
+  id              String @id @default(cuid())
+  contentId       String @unique
+  partId          String
+  slug            String
+  title           String
+  order           Int
+  durationMinutes Int
+  markdownContent String
+  proofRules      String // JSON string: { type, patterns, instructions }
+  proofRulesJson  String @default("{}")
+  reviewScheduleDays String @default("[1,3,7,14]")
+  xpReward        Int    @default(100)
+  starterCode     String @default("")
+  testCode        String @default("")
+  solutionCode    String @default("")
+
+  part        Part         @relation(fields: [partId], references: [id], onDelete: Cascade)
+  submissions Submission[]
+  reviews     ReviewItem[]
+  lessonVisual LessonVisual?
+
+  @@unique([partId, slug])
+}
+
+model Quest {
+  id              String @id @default(cuid())
+  contentId       String @unique
+  partId          String @unique
+  slug            String @default("quest")
+  title           String
+  markdownContent String
+  proofRules      String // JSON string
+  proofRulesJson  String @default("{}")
+  xpReward        Int    @default(250)
+  starterCode     String @default("")
+  testCode        String @default("")
+
+  part        Part         @relation(fields: [partId], references: [id], onDelete: Cascade)
+  submissions Submission[]
+  questVisual QuestVisual?
+}
+
+model Submission {
+  id        String   @id @default(cuid())
+  userId    String?
+  lessonId  String?
+  questId   String?
+  createdAt DateTime @default(now())
+  status    String   // pending, passed, failed
+  text      String?
+  filePath  String?
+  pastedText String?
+  uploadPath String?
+  xpAwarded Int      @default(0)
+
+  user   User?   @relation(fields: [userId], references: [id])
+  lesson Lesson? @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+  quest  Quest?  @relation(fields: [questId], references: [id], onDelete: Cascade)
+}
+
+model ReviewItem {
+  id          String    @id @default(cuid())
+  userId      String?
+  lessonId    String
+  dueAt       DateTime
+  completedAt DateTime?
+
+  user   User?  @relation(fields: [userId], references: [id])
+  lesson Lesson @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+}
+
+model UserProgress {
+  id               String   @id @default(cuid())
+  userId           String
+  partId           String
+  completedLessons Int      @default(0)
+  questCompleted   Boolean  @default(false)
+  lastActivityAt   DateTime @default(now())
+  currentStreak    Int      @default(0)
+  longestStreak    Int      @default(0)
+  lastStreakDate   DateTime?
+
+  user User @relation(fields: [userId], references: [id])
+
+  @@unique([userId, partId])
+}
+
+model Achievement {
+  id          String @id @default(cuid())
+  slug        String @unique
+  title       String
+  description String
+  icon        String @default("🏆")
+  xpReward    Int    @default(50)
+  category    String @default("general")
+
+  users UserAchievement[]
+}
+
+model UserAchievement {
+  id            String   @id @default(cuid())
+  userId        String
+  achievementId String
+  unlockedAt    DateTime @default(now())
+
+  user        User        @relation(fields: [userId], references: [id])
+  achievement Achievement @relation(fields: [achievementId], references: [id])
+
+  @@unique([userId, achievementId])
+}
+
+model VisualAsset {
+  id              String @id
+  title           String
+  sourceUrl       String
+  licenseName     String
+  licenseUrl      String
+  author          String?
+  attributionText String
+  altText         String
+  localPath       String?
+
+  lessonVisuals LessonVisual[]
+  questVisuals  QuestVisual[]
+  partVisuals   PartVisual[]
+}
+
+model LessonVisual {
+  id       String @id @default(cuid())
+  lessonId String @unique
+  visualId String
+
+  lesson Lesson @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+  visual VisualAsset @relation(fields: [visualId], references: [id], onDelete: Cascade)
+}
+
+model QuestVisual {
+  id      String @id @default(cuid())
+  questId String @unique
+  visualId String
+
+  quest  Quest       @relation(fields: [questId], references: [id], onDelete: Cascade)
+  visual VisualAsset @relation(fields: [visualId], references: [id], onDelete: Cascade)
+}
+
+model PartVisual {
+  id     String @id @default(cuid())
+  partId String @unique
+  visualId String
+
+  part   Part        @relation(fields: [partId], references: [id], onDelete: Cascade)
+  visual VisualAsset @relation(fields: [visualId], references: [id], onDelete: Cascade)
+}
+
+// ── Training Mode (GYM EDITION) ──────────────────────────────
+
+model WeeklyBenchmark {
+  id          String   @id @default(cuid())
+  userId      String
+  weekNumber  Int      // 1-24
+  metricName  String   // e.g. "CLI test coverage", "Logger throughput"
+  target      String   // e.g. "80%", "1K entries/s"
+  result      String?  // user-entered measured value
+  passed      Boolean  @default(false)
+  notes       String?
+  updatedAt   DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, weekNumber, metricName])
+}
+
+model TrainingLog {
+  id           String   @id @default(cuid())
+  userId       String
+  weekNumber   Int
+  dayNumber    Int      // 1-7 within the week
+  date         DateTime @default(now())
+  proofShipped Boolean  @default(false)
+  failureCause String?  // top failure root cause (1 sentence)
+  notes        String?  // free text
+  energyLevel  Int?     // 1-10
+  focusMinutes Int?     // actual minutes of focused work
+  updatedAt    DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, weekNumber, dayNumber])
+}
+
+model WeeklyGate {
+  id             String   @id @default(cuid())
+  userId         String
+  weekNumber     Int
+  benchmarkPassed Boolean @default(false)
+  overridden     Boolean  @default(false)
+  completedAt    DateTime?
+  updatedAt      DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, weekNumber])
+}

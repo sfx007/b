@@ -1,0 +1,78 @@
+"use client";
+
+import { TrainingSessionCard } from "./training-session-card";
+
+interface LessonContentPanelProps {
+  /** Lesson title for the content heading */
+  lessonTitle: string;
+  /** Lesson order number */
+  lessonOrder: number;
+  /** Lesson duration in minutes */
+  durationMinutes: number;
+  /** Is this a quest page */
+  isQuest?: boolean;
+  /** Whether the lesson has been passed */
+  passed?: boolean;
+  /** Structured goal text */
+  goal: string;
+  /** What to deliver (exact filename) */
+  deliverable: string;
+  /** Numbered steps from the Do section */
+  doSteps: string[];
+  /** What counts as done */
+  whatCounts: string;
+  /** Proof instructions */
+  proofInstructions: string;
+  /** Full lesson markdown rendered as HTML (H1 already stripped) */
+  contentHtml: string;
+}
+
+export function LessonContentPanel({
+  lessonTitle,
+  lessonOrder,
+  durationMinutes,
+  isQuest,
+  passed,
+  goal,
+  deliverable,
+  doSteps,
+  whatCounts,
+  proofInstructions,
+  contentHtml,
+}: LessonContentPanelProps) {
+  return (
+    <div className="flex flex-col" style={{ gap: '32px' }}>
+      {/* ===== Lesson title ===== */}
+      <div>
+        {!isQuest && (
+          <p className="text-xs uppercase tracking-widest text-gray-450 mb-1">
+            Lesson {lessonOrder}
+          </p>
+        )}
+        <h1 className="text-xl font-bold text-gray-100 leading-tight">
+          {isQuest ? "🏰 " : ""}{lessonTitle}
+        </h1>
+      </div>
+
+      {/* ===== Training Session Card (GYM EDITION) ===== */}
+      <TrainingSessionCard
+        durationMinutes={durationMinutes}
+        goal={goal}
+        deliverable={deliverable}
+        doSteps={doSteps}
+        whatCounts={whatCounts}
+        proofInstructions={proofInstructions}
+        isQuest={isQuest}
+        passed={passed}
+      />
+
+      {/* ===== Markdown lesson content ===== */}
+      <div style={{ maxWidth: '70ch' }}>
+        <article
+          className="prose"
+          dangerouslySetInnerHTML={{ __html: contentHtml }}
+        />
+      </div>
+    </div>
+  );
+}

@@ -1,0 +1,138 @@
+{
+  "flow-while-loop": {
+    "title": "While loop flowchart",
+    "page_url": "https://commons.wikimedia.org/wiki/File:While-loop-diagram.svg",
+    "download_url": "https://commons.wikimedia.org/wiki/Special:FilePath/While-loop-diagram.svg",
+    "license": "CC0 1.0 (public domain dedication)",
+    "source_note": "Wikimedia Commons",
+    "alt": "Flowchart of a while loop: check condition, execute body, repeat."
+  },
+  "tcp-transfer": {
+    "title": "TCP transfer / segmentation & reassembly",
+    "page_url": "https://commons.wikimedia.org/wiki/File:Tcp_transfer.png",
+    "download_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Tcp_transfer.png",
+    "license": "CC BY-SA 3.0 or GFDL (dual-licensed)",
+    "source_note": "Wikimedia Commons",
+    "alt": "Diagram showing TCP data split into segments and reassembled at receiver."
+  },
+  "fd-file-inode-table": {
+    "title": "File descriptors → file table → inode table",
+    "page_url": "https://commons.wikimedia.org/wiki/File:File_table_and_inode_table.svg",
+    "download_url": "https://commons.wikimedia.org/wiki/Special:FilePath/File_table_and_inode_table.svg",
+    "license": "See file page (Wikimedia Commons)",
+    "source_note": "Wikimedia Commons",
+    "alt": "Unix diagram mapping file descriptors to file table entries and inodes."
+  },
+  "http-transaction": {
+    "title": "Simplified HTTP transaction",
+    "page_url": "https://commons.wikimedia.org/wiki/File:Simplified_diagram_of_an_HTTP_transaction.png",
+    "download_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Simplified_diagram_of_an_HTTP_transaction.png",
+    "license": "CC BY-SA 4.0",
+    "source_note": "Wikimedia Commons",
+    "alt": "Client sends HTTP request to server and receives response."
+  },
+  "thread-pool": {
+    "title": "Thread pool with task queue",
+    "page_url": "https://commons.wikimedia.org/wiki/File:Thread_pool.svg",
+    "download_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Thread_pool.svg",
+    "license": "CC BY-SA 3.0 or GFDL (dual-licensed)",
+    "source_note": "Wikimedia Commons",
+    "alt": "A thread pool where tasks queue up and threads execute tasks."
+  },
+  "token-bucket": {
+    "title": "Token bucket (QoS policing)",
+    "page_url": "https://commons.wikimedia.org/wiki/File:QoS_tocken_bucket.svg",
+    "download_url": "https://commons.wikimedia.org/wiki/Special:FilePath/QoS_tocken_bucket.svg",
+    "license": "See file page (Wikimedia Commons)",
+    "source_note": "Wikimedia Commons",
+    "alt": "Token bucket with tokens arriving and packets passing when enough tokens exist."
+  },
+  "dns-iterative-resolver": {
+    "title": "Iterative DNS resolver example",
+    "page_url": "https://commons.wikimedia.org/wiki/File:Example_of_an_iterative_DNS_resolver.svg",
+    "download_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Example_of_an_iterative_DNS_resolver.svg",
+    "license": "Public domain (PD-self)",
+    "source_note": "Wikimedia Commons",
+    "alt": "Resolver queries root, TLD, and authoritative servers to resolve a domain."
+  },
+  "digital-signature": {
+    "title": "Digital signature: sign & verify",
+    "page_url": "https://commons.wikimedia.org/wiki/File:Digital_Signature_diagram.svg",
+    "download_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Digital_Signature_diagram.svg",
+    "license": "CC BY-SA 3.0 or GFDL (dual-licensed)",
+    "source_note": "Wikimedia Commons",
+    "alt": "Sender signs a hash with private key; verifier checks with public key."
+  },
+  "merkle-tree": {
+    "title": "Merkle tree (ZFS example)",
+    "page_url": "https://commons.wikimedia.org/wiki/File:ZFS_Merkle_Tree_2.svg",
+    "download_url": "https://commons.wikimedia.org/wiki/Special:FilePath/ZFS_Merkle_Tree_2.svg",
+    "license": "See file page (Wikimedia Commons)",
+    "source_note": "Wikimedia Commons",
+    "alt": "Merkle tree of blocks with hashes up to a root hash."
+  },
+  "primary-backup": {
+    "title": "Primary-backup replication protocol",
+    "page_url": "https://commons.wikimedia.org/wiki/File:Primary-backup-protocol.gif",
+    "download_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Primary-backup-protocol.gif",
+    "license": "See file page (Wikimedia Commons)",
+    "source_note": "Wikimedia Commons",
+    "alt": "Primary sends updates to backup and acknowledges to client."
+  },
+  "threat-model": {
+    "title": "System threat model overview",
+    "page_url": "https://commons.wikimedia.org/wiki/File:System_threat_model.svg",
+    "download_url": "https://commons.wikimedia.org/wiki/Special:FilePath/System_threat_model.svg",
+    "license": "See file page (Wikimedia Commons)",
+    "source_note": "Wikimedia Commons",
+    "alt": "Diagram connecting threats, vulnerabilities, exploits, controls, and assets."
+  },
+  "custom-event-loop": {
+    "title": "Custom: event loop / readiness-based I/O",
+    "page_url": "/visuals/custom-event-loop.svg",
+    "download_url": "/visuals/custom-event-loop.svg",
+    "license": "Original (project asset)",
+    "source_note": "Trust Systems Platform",
+    "alt": "Event loop: wait for readiness, handle events, repeat."
+  },
+  "custom-wal": {
+    "title": "Custom: write-ahead log + checkpoint",
+    "page_url": "/visuals/custom-wal.svg",
+    "download_url": "/visuals/custom-wal.svg",
+    "license": "Original (project asset)",
+    "source_note": "Trust Systems Platform",
+    "alt": "Append log before applying state; checkpoint to compact; recover by replay."
+  },
+  "custom-slo": {
+    "title": "Custom: SLO / error budget burn-down",
+    "page_url": "/visuals/custom-slo.svg",
+    "download_url": "/visuals/custom-slo.svg",
+    "license": "Original (project asset)",
+    "source_note": "Trust Systems Platform",
+    "alt": "Error budget decreases with bad events; burn rate indicates urgency."
+  },
+  "custom-offline-bundle": {
+    "title": "Custom: offline verification bundle",
+    "page_url": "/visuals/custom-offline-bundle.svg",
+    "download_url": "/visuals/custom-offline-bundle.svg",
+    "license": "Original (project asset)",
+    "source_note": "Trust Systems Platform",
+    "alt": "Package contains document, signature, proofs, and log checkpoint for offline verify."
+  },
+  "custom-hardening": {
+    "title": "Custom: failure-mode matrix / blast radius",
+    "page_url": "/visuals/custom-hardening.svg",
+    "download_url": "/visuals/custom-hardening.svg",
+    "license": "Original (project asset)",
+    "source_note": "Trust Systems Platform",
+    "alt": "Grid of failure types vs mitigations; shows blast radius and recovery steps."
+  },
+  "crypto-hash": {
+    "title": "Cryptographic hash function",
+    "page_url": "https://commons.wikimedia.org/wiki/File:Cryptographic_Hash_Function.svg",
+    "download_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Cryptographic_Hash_Function.svg",
+    "license": "Public domain",
+    "source_note": "Wikimedia Commons",
+    "alt": "Hash function maps input message to fixed-length digest; small input change changes digest."
+  }
+}
